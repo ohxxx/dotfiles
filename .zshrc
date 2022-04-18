@@ -10,7 +10,7 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-# You can change the theme with another one from See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# ZSH theme：https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 # Disable warning about insecure completion-dependent directories
 ZSH_DISABLE_COMPFIX="true"
@@ -64,13 +64,13 @@ alias gh='cd ~ && cd Desktop/github/'
 alias os='cd ~ && cd Desktop/opensource/'
 alias czsh='code ~/.zshrc'
 alias szsh='source ~/.zshrc'
-# 设置镜像源
+# Set mirror source
 alias rnpm='nrm use npm'
 alias ryarn='nrm use yarn'
 alias rtb='nrm use taobao'
 alias rtx='nrm use tencent'
 alias rconf='npm config get registry'
-# 开发配置
+# Development configuration
 alias i='ni'
 alias io='ni --prefer-offline'
 alias ui='nun'
