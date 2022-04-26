@@ -1,0 +1,10 @@
+{
+  "xxx Print to console": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue",
+    "prefix": "xl",
+    "body": [
+      "console.log('xxx#$1');"
+    ],
+    "description": "Log output to console"
+  }
+}
