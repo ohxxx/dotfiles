@@ -3,3 +3,5 @@
 </h1>
 
 - [.zshrc](./.zshrc)
+- [.vscode-settings](./vscode/settings.json)
+- [.vscode-snippets](./vscode/snippets/)
