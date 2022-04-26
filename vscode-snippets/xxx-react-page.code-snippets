@@ -1,0 +1,18 @@
+{
+  "Print to console": {
+    "scope": "typescriptreact",
+    "prefix": "xrp",
+    "body": [
+      "import { FC, useEffect, useState } from 'react'\n",
+      "interface IProps { }\n",
+      "const ${1}Page: FC<IProps> = () => {",
+      "\tconst [state, setState] = useState()\n",
+      "\tuseEffect(() => {\n",
+      "\t}, [])\n",
+      "\treturn <div>${1}Page</div>",
+      "}\n",
+      "export default ${1}Page"
+    ],
+    "description": "xrp output to React Function Page"
+  }
+}
