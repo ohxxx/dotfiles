@@ -1,0 +1,10 @@
+{
+  "xxx Print to console": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact,html,vue",
+    "prefix": "xww",
+    "body": [
+      "console.warn('xxx#$1', $1);"
+    ],
+    "description": "Log output to console"
+  }
+}
