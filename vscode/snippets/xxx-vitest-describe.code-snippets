@@ -1,0 +1,14 @@
+{
+	"xxx Create Vitest": {
+		"scope": "javascript,typescript",
+		"prefix": "xvd",
+		"body": [
+      "describe('测试', () => {\n",
+      "\tit('测试', () => {",
+      "\t\texpect(1).not.toBe(2)",
+      "\t})\n",
+      "})",
+		],
+		"description": "xvt output to vitest describe method"
+	}
+}

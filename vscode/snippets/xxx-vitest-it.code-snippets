@@ -1,0 +1,12 @@
+{
+	"xxx Create Vitest": {
+		"scope": "javascript,typescript",
+		"prefix": "xvi",
+		"body": [
+      "it('测试', () => {",
+      "\t\texpect(1).not.toBe(2)",
+      "})\n",
+		],
+		"description": "xvt output to vitest"
+	}
+}
