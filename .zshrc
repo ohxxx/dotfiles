@@ -1,11 +1,11 @@
 # Fig pre block. Keep at the top of this file.
 . "$HOME/.fig/shell/zshrc.pre.zsh"
 
-#******************************************
-#                                         #
-#               Oh My ZSH                 #
-#                                         #
-#*****************************************/
+#****************************************#
+#                                        #
+#                Oh My ZSH               #
+#                                        #
+#****************************************#
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Path to your oh-my-zsh installation.
@@ -23,21 +23,21 @@ plugins=(
 # Actually load Oh-My-Zsh
 source $ZSH/oh-my-zsh.sh
 
-#******************************************
-#                                         #
-#                  NVM                    #
-#                                         #
-#*****************************************/
+#****************************************#
+#                                        #
+#                   NVM                  #
+#                                        #
+#****************************************#
 # NVM directory settings
 export NVM_DIR="$HOME/.nvm"
   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
 
-#******************************************
-#                                         #
-#            NPM BINRAY CHINA             #
-#                                         #
-#*****************************************/
+#****************************************#
+#                                        #
+#            NPM BINRAY CHINA            #
+#                                        #
+#****************************************#
 # https://github.com/cnpm/binary-mirror-config/blob/master/package.json#L48
 export NODEJS_ORG_MIRROR="https://cdn.npmmirror.com/binaries/node"
 export NVM_NODEJS_ORG_MIRROR="https://cdn.npmmirror.com/binaries/node"
@@ -55,21 +55,23 @@ export SAUCECTL_INSTALL_BINARY_MIRROR="https://cdn.npmmirror.com/binaries/saucec
 export npm_config_sharp_binary_host="https://cdn.npmmirror.com/binaries/sharp"
 export npm_config_sharp_libvips_binary_host="https://cdn.npmmirror.com/binaries/sharp-libvips"
 export npm_config_robotjs_binary_host="https://cdn.npmmirror.com/binaries/robotj"
-#******************************************
-#                                         #
-#                  ALIAS                  #
-#                                         #
-#*****************************************/
+
+#****************************************#
+#                                        #
+#                  ALIAS                 #
+#                                        #
+#****************************************#
+alias dk='cd ~ && cd Desktop/'
 alias gh='cd ~ && cd Desktop/github/'
 alias os='cd ~ && cd Desktop/opensource/'
 alias czsh='code ~/.zshrc'
 alias szsh='source ~/.zshrc'
 # Set mirror source
-alias msnpm='nrm use npm'
-alias msyarn='nrm use yarn'
-alias mstb='nrm use taobao'
-alias mstx='nrm use tencent'
-alias msconf='npm config get registry'
+alias nmn='nrm use npm'
+alias nmy='nrm use yarn'
+alias nmtb='nrm use taobao'
+alias nmtx='nrm use tencent'
+alias nmconf='npm config get registry'
 # Development configuration
 alias i='ni'
 alias io='ni --prefer-offline'
@@ -80,10 +82,29 @@ alias b='nr build'
 alias t='nr test'
 alias tu='nr test -u'
 alias de='nr electron:dev'
-alias tsd='npx tsd'
 alias run='esno'
 alias rn='rm -rf node_modules'
 alias c='code .'
+
+#****************************************#
+#                                        #
+#                commands                #
+#                                        #
+#****************************************#
+# Startup project
+function serve() {
+  if [[ -z $1 ]] then
+    live-server dist
+  else
+    live-server $1
+  fi
+}
+# Update gitignore
+function ign() {
+  rm -rf .gitignore
+  touch .gitignore
+  echo "# Ide\n*.DS_Store\n.idea\n\n# Logs\nlogs\n*.log\npnpm-debug.log*\nnpm-debug.log*\nyarn-debug.log*\nyarn-error.log*\n\n# Dependency directories\nnode_modules\n\n# Build\ndist" >>.gitignore
+}
 
 # Fig post block. Keep at the bottom of this file.
 . "$HOME/.fig/shell/zshrc.post.zsh"
