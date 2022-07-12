@@ -1,6 +1,5 @@
 # Fig pre block. Keep at the top of this file.
-. "$HOME/.fig/shell/zshrc.pre.zsh"
-
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && . "$HOME/.fig/shell/zshrc.pre.zsh"
 #****************************************#
 #                                        #
 #                Oh My ZSH               #
@@ -11,7 +10,8 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 # ZSH theme：https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+# ZSH_THEME="robbyrussell"
+ZSH_THEME="spaceship"
 # Disable warning about insecure completion-dependent directories
 ZSH_DISABLE_COMPFIX="true"
 # Useful oh-my-zsh plugins for Le Wagon bootcamps
@@ -64,6 +64,7 @@ export npm_config_robotjs_binary_host="https://cdn.npmmirror.com/binaries/robotj
 alias dk='cd ~ && cd Desktop/'
 alias gh='cd ~ && cd Desktop/github/'
 alias os='cd ~ && cd Desktop/opensource/'
+alias cy='cd ~ && cd Desktop/cyclone/'
 alias czsh='code ~/.zshrc'
 alias szsh='source ~/.zshrc'
 # Set mirror source
@@ -85,6 +86,11 @@ alias de='nr electron:dev'
 alias run='esno'
 alias rn='rm -rf node_modules'
 alias c='code .'
+alias tmpl="degit"
+alias pv="pnpm create vite"
+alias pu="pnpm create @umijs/umi-app"
+alias srct="treer -d src -e ./result.txt -i '/node_modules|.git|.umi|.umi-production|.DS_Store/'"
+alias allt="treer -e ./result.txt -i '/node_modules|.git|.umi|.umi-production|.DS_Store/'"
 
 #****************************************#
 #                                        #
@@ -106,5 +112,16 @@ function ign() {
   echo "# Ide\n*.DS_Store\n.idea\n\n# Logs\nlogs\n*.log\npnpm-debug.log*\nnpm-debug.log*\nyarn-debug.log*\nyarn-error.log*\n\n# Dependency directories\nnode_modules\n\n# Build\ndist" >>.gitignore
 }
 
+#****************************************#
+#                                        #
+#                   Bun                  #
+#                                        #
+#****************************************#
+# bun completions
+[ -s "/Users/xxx/.bun/_bun" ] && source "/Users/xxx/.bun/_bun"
+# bun
+export BUN_INSTALL="/Users/xxx/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
 # Fig post block. Keep at the bottom of this file.
-. "$HOME/.fig/shell/zshrc.post.zsh"
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && . "$HOME/.fig/shell/zshrc.post.zsh"
