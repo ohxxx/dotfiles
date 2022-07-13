@@ -61,10 +61,8 @@ export npm_config_robotjs_binary_host="https://cdn.npmmirror.com/binaries/robotj
 #                  ALIAS                 #
 #                                        #
 #****************************************#
-alias dk='cd ~ && cd Desktop/'
-alias gh='cd ~ && cd Desktop/github/'
-alias os='cd ~ && cd Desktop/opensource/'
-alias cy='cd ~ && cd Desktop/cyclone/'
+alias dk='cd ~/Desktop/'
+alias gh='cd ~/Desktop/github/'
 alias czsh='code ~/.zshrc'
 alias szsh='source ~/.zshrc'
 # Set mirror source
@@ -89,8 +87,13 @@ alias c='code .'
 alias tmpl="degit"
 alias pv="pnpm create vite"
 alias pu="pnpm create @umijs/umi-app"
+# Directory tree
 alias srct="treer -d src -e ./result.txt -i '/node_modules|.git|.umi|.umi-production|.DS_Store/'"
 alias allt="treer -e ./result.txt -i '/node_modules|.git|.umi|.umi-production|.DS_Store/'"
+# Git
+alias -s git="git clone --depth 1"
+# Launch applications
+alias chrome='open -a "/Applications/Google Chrome.app" --args --force-renderer-accessibility'
 
 #****************************************#
 #                                        #
@@ -110,6 +113,10 @@ function ign() {
   rm -rf .gitignore
   touch .gitignore
   echo "# Ide\n*.DS_Store\n.idea\n\n# Logs\nlogs\n*.log\npnpm-debug.log*\nnpm-debug.log*\nyarn-debug.log*\nyarn-error.log*\n\n# Dependency directories\nnode_modules\n\n# Build\ndist" >>.gitignore
+}
+# Create directory
+function dir() {
+  mkdir $1 && cd $1
 }
 
 #****************************************#
