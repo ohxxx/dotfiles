@@ -87,7 +87,13 @@ alias c='code .'
 alias tmpl="degit"
 alias pv="pnpm create vite"
 alias pu="pnpm create @umijs/umi-app"
-# Directory tree
+# Directory
+alias ~="cd ~"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias o="open ."
 alias srct="treer -d src -e ./result.txt -i '/node_modules|.git|.umi|.umi-production|.DS_Store/'"
 alias allt="treer -e ./result.txt -i '/node_modules|.git|.umi|.umi-production|.DS_Store/'"
 # Git
