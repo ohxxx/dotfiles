@@ -224,7 +224,6 @@
     "tsup",
     "esbuild",
     "antd",
-    "ciri",
     "storejs",
     "ahooks",
     "pnpm",
@@ -232,7 +231,8 @@
     "foca",
     "iconify",
     "nuxt",
-    "cascader"
+    "cascader",
+    "vitepress"
   ],
   // [ Copilot ]
   "github.copilot.enable": {
