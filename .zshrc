@@ -108,11 +108,12 @@ alias chrome='open -a "/Applications/Google Chrome.app" --args --force-renderer-
 #****************************************#
 # Startup project
 function serve() {
-  if [[ -z $1 ]] then
-    live-server dist
-  else
-    live-server $1
-  fi
+  live-server $1
+  # if [[ -z $1 ]] then
+  #   live-server dist
+  # else
+  #   live-server $1
+  # fi
 }
 # Update gitignore
 function ign() {
