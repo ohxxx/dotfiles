@@ -125,6 +125,10 @@ function ign() {
 function dir() {
   mkdir $1 && cd $1
 }
+# Delete Files
+function del() {
+  rm -rf $1
+}
 
 #****************************************#
 #                                        #
