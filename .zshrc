@@ -136,9 +136,9 @@ function del() {
 #                                        #
 #****************************************#
 # bun completions
-[ -s "/Users/xxx/.bun/_bun" ] && source "/Users/xxx/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 # bun
-export BUN_INSTALL="/Users/xxx/.bun"
+export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Fig post block. Keep at the bottom of this file.
