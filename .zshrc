@@ -84,9 +84,10 @@ alias de='nr electron:dev'
 alias run='esno'
 alias rn='rm -rf node_modules'
 alias c='code .'
-alias tmpl="degit"
-alias pv="pnpm create vite"
-alias pu="pnpm create @umijs/umi-app"
+alias tplts="degit git@github.com:xxxDeveloper/ts-tmpl.git"
+alias tplvsc="degit git@github.com:xxxDeveloper/vscode-ext-tmpl.git"
+alias nvite="pnpm create vite"
+alias numi="pnpm create @umijs/umi-app"
 # Directory
 alias ~="cd ~"
 alias ..="cd .."
@@ -128,6 +129,10 @@ function dir() {
 # Delete Files
 function del() {
   rm -rf $1
+}
+# Citation Template
+function tpl() {
+  degit $1
 }
 
 #****************************************#
