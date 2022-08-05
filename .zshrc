@@ -84,8 +84,8 @@ alias de='nr electron:dev'
 alias run='esno'
 alias rn='rm -rf node_modules'
 alias c='code .'
-alias tplts="degit git@github.com:xxxDeveloper/ts-tmpl.git"
-alias tplvsc="degit git@github.com:xxxDeveloper/vscode-ext-tmpl.git"
+alias tplts="degit git@github.com:xxxDeveloper/ts-tmpl.gi --force"
+alias tplvsc="degit git@github.com:xxxDeveloper/vscode-ext-tmpl.git --force"
 alias nvite="pnpm create vite"
 alias numi="pnpm create @umijs/umi-app"
 # Directory
@@ -132,7 +132,7 @@ function del() {
 }
 # Citation Template
 function tpl() {
-  degit $1
+  degit $1 --force
 }
 
 #****************************************#
