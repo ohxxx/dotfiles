@@ -120,7 +120,25 @@ function serve() {
 function ign() {
   rm -rf .gitignore
   touch .gitignore
-  echo "# Ide\n*.DS_Store\n.idea\n\n# Logs\nlogs\n*.log\npnpm-debug.log*\nnpm-debug.log*\nyarn-debug.log*\nyarn-error.log*\n\n# Dependency directories\nnode_modules\n\n# Build\ndist" >>.gitignore
+  echo "
+    # Ide
+    *.DS_Store
+    .idea
+
+    # Logs
+    logs
+    *.log
+    pnpm-debug.log*
+    npm-debug.log*
+    yarn-debug.log*
+    yarn-error.log*
+
+    # Dependency directories
+    node_modules
+
+    # Build
+    dist
+  ">>.gitignore
 }
 # Create directory
 function dir() {
