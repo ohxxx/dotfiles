@@ -121,23 +121,23 @@ function ign() {
   rm -rf .gitignore
   touch .gitignore
   echo "
-    # Ide
-    *.DS_Store
-    .idea
+# Ide
+*.DS_Store
+.idea
 
-    # Logs
-    logs
-    *.log
-    pnpm-debug.log*
-    npm-debug.log*
-    yarn-debug.log*
-    yarn-error.log*
+# Logs
+logs
+*.log
+pnpm-debug.log*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-    # Dependency directories
-    node_modules
+# Dependency directories
+node_modules
 
-    # Build
-    dist
+# Build
+dist
   ">>.gitignore
 }
 # Create directory
