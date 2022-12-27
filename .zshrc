@@ -1,5 +1,5 @@
 # Fig pre block. Keep at the top of this file.
-[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && . "$HOME/.fig/shell/zshrc.pre.zsh"
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
 #****************************************#
 #                                        #
 #                Oh My ZSH               #
@@ -10,8 +10,8 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 # ZSH theme：https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="robbyrussell"
-ZSH_THEME="spaceship"
+ZSH_THEME="robbyrussell"
+# ZSH_THEME="spaceship"
 # Disable warning about insecure completion-dependent directories
 ZSH_DISABLE_COMPFIX="true"
 # Useful oh-my-zsh plugins for Le Wagon bootcamps
@@ -61,8 +61,6 @@ export npm_config_robotjs_binary_host="https://cdn.npmmirror.com/binaries/robotj
 #                  ALIAS                 #
 #                                        #
 #****************************************#
-alias dk='cd ~/Desktop/'
-alias gh='cd ~/Desktop/github/'
 alias czsh='code ~/.zshrc'
 alias szsh='source ~/.zshrc'
 # Set mirror source
@@ -82,10 +80,10 @@ alias t='nr test'
 alias tu='nr test -u'
 alias de='nr electron:dev'
 alias run='esno'
-alias rn='rm -rf node_modules'
+alias rmn='rm -rf node_modules'
 alias c='code .'
-alias tplts="degit git@github.com:xxxDeveloper/ts-tmpl.gi --force"
-alias tplvsc="degit git@github.com:xxxDeveloper/vscode-ext-tmpl.git --force"
+alias tplts="degit git@github.com:ohxxx/ts-tmpl.git --force"
+alias tplvsc="degit git@github.com:ohxxx/vscode-ext-tmpl.git --force"
 alias nvite="pnpm create vite"
 alias numi="pnpm create @umijs/umi-app"
 # Directory
@@ -99,8 +97,14 @@ alias srct="treer -d src -e ./result.txt -i '/node_modules|.git|.umi|.umi-produc
 alias allt="treer -e ./result.txt -i '/node_modules|.git|.umi|.umi-production|.DS_Store/'"
 # Git
 alias -s git="git clone --depth 1"
+alias all_authors="git log --all --format='%aN <%cE>' | sort -u"
 # Launch applications
 alias chrome='open -a "/Applications/Google Chrome.app" --args --force-renderer-accessibility'
+# Network proxy
+alias proxy="export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890"
+# Npm proxy
+alias open_npmproxy="npm config set proxy=http://127.0.0.1:7890"
+alias close_npmproxy="npm config delete proxy"
 
 #****************************************#
 #                                        #
@@ -110,11 +114,6 @@ alias chrome='open -a "/Applications/Google Chrome.app" --args --force-renderer-
 # Startup project
 function serve() {
   live-server $1
-  # if [[ -z $1 ]] then
-  #   live-server dist
-  # else
-  #   live-server $1
-  # fi
 }
 # Update gitignore
 function ign() {
@@ -140,6 +139,12 @@ node_modules
 dist
   ">>.gitignore
 }
+# Update tsconfig
+function tsconf() {
+  rm -rf tsconfig.json
+  touch tsconfig.json
+  echo '...' >>tsconfig.json
+}
 # Create directory
 function dir() {
   mkdir $1 && cd $1
@@ -152,6 +157,23 @@ function del() {
 function tpl() {
   degit $1 --force
 }
+# Go to Dir
+function gt() {
+  if [[ $1 == "" || $1 == "-l" || $1 == "-c" ]]; then
+    echo $($HOME/go/bin/gt $@)
+  else
+    builtin cd "$($HOME/go/bin/gt $@)"
+  fi
+}
+#****************************************#
+#                                        #
+#                   Go                   #
+#                                        #
+#****************************************#
+export GOPATH="$HOME/go"
+export GOROOT="/usr/local/go"
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
 
 #****************************************#
 #                                        #
@@ -165,4 +187,4 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && . "$HOME/.fig/shell/zshrc.post.zsh"
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
