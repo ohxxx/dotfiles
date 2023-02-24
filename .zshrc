@@ -12,8 +12,6 @@ export ZSH="$HOME/.oh-my-zsh"
 # ZSH theme：https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 # ZSH_THEME="spaceship"
-# Disable warning about insecure completion-dependent directories
-ZSH_DISABLE_COMPFIX="true"
 # Useful oh-my-zsh plugins for Le Wagon bootcamps
 plugins=(
   git
@@ -28,10 +26,21 @@ source $ZSH/oh-my-zsh.sh
 #                   NVM                  #
 #                                        #
 #****************************************#
-# NVM directory settings
+# Load NVM
+if [[ ! -a ~/.zsh-async ]]; then
+  git clone git@github.com:mafredri/zsh-async.git ~/.zsh-async
+fi
+source ~/.zsh-async/async.zsh
+
 export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+function load_nvm() {
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+}
+# Initialize worker
+async_start_worker nvm_worker -n
+async_register_callback nvm_worker load_nvm
+async_job nvm_worker sleep 0.1
 
 #****************************************#
 #                                        #
@@ -63,6 +72,8 @@ export npm_config_robotjs_binary_host="https://cdn.npmmirror.com/binaries/robotj
 #****************************************#
 alias czsh='code ~/.zshrc'
 alias szsh='source ~/.zshrc'
+alias ,dk="cd ~/Desktop"
+alias ,ip="ipconfig getifaddr en0"
 # Set mirror source
 alias nmn='nrm use npm'
 alias nmy='nrm use yarn'
@@ -70,6 +81,7 @@ alias nmtb='nrm use taobao'
 alias nmtx='nrm use tencent'
 alias nmconf='npm config get registry'
 # Development configuration
+alias pm="projj"
 alias i='ni'
 alias io='ni --prefer-offline'
 alias ui='nun'
@@ -78,8 +90,11 @@ alias s='nr start'
 alias b='nr build'
 alias t='nr test'
 alias tu='nr test -u'
+alias l='nr lint'
+alias lf='nr lint:fix'
 alias de='nr electron:dev'
 alias run='esno'
+alias brun="bun run"
 alias rmn='rm -rf node_modules'
 alias c='code .'
 alias tplts="degit git@github.com:ohxxx/ts-tmpl.git --force"
@@ -95,22 +110,41 @@ alias .....="cd ../../../.."
 alias o="open ."
 alias srct="treer -d src -e ./result.txt -i '/node_modules|.git|.umi|.umi-production|.DS_Store/'"
 alias allt="treer -e ./result.txt -i '/node_modules|.git|.umi|.umi-production|.DS_Store/'"
+# Cat file
+alias -s {js,json,env,md,html,css,toml}=cat
 # Git
-alias -s git="git clone --depth 1"
+alias -s git="pm add"
 alias all_authors="git log --all --format='%aN <%cE>' | sort -u"
 # Launch applications
 alias chrome='open -a "/Applications/Google Chrome.app" --args --force-renderer-accessibility'
 # Network proxy
 alias proxy="export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890"
+alias unproxy="unset https_proxy http_proxy all_proxy"
 # Npm proxy
 alias open_npmproxy="npm config set proxy=http://127.0.0.1:7890"
 alias close_npmproxy="npm config delete proxy"
 
 #****************************************#
 #                                        #
-#                commands                #
+#                COMMANDS                #
 #                                        #
 #****************************************#
+# Jump Dir
+function ,d() {
+  cd ~/Documents
+}
+function ,x() {
+  ,d && cd Repos/github.com/ohxxx/$1
+}
+function ,t() {
+  ,d && cd Tmp/$1
+}
+function ,r() {
+  ,d && cd Repos/github.com/$1
+}
+function ,f() {
+  ,d && cd Forks/github.com/$1
+}
 # Startup project
 function serve() {
   live-server $1
@@ -119,25 +153,7 @@ function serve() {
 function ign() {
   rm -rf .gitignore
   touch .gitignore
-  echo "
-# Ide
-*.DS_Store
-.idea
-
-# Logs
-logs
-*.log
-pnpm-debug.log*
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Dependency directories
-node_modules
-
-# Build
-dist
-  ">>.gitignore
+  echo "..." >>.gitignore
 }
 # Update tsconfig
 function tsconf() {
@@ -165,9 +181,36 @@ function gt() {
     builtin cd "$($HOME/go/bin/gt $@)"
   fi
 }
+# Reanme Current File
+function ,rn() {
+  if [ $# -eq 0 ]; then
+    echo "Usage: rn new-name"
+    return 1
+  fi
+
+  current_dir=$(pwd)
+  new_dir="${current_dir%/*}/$1"
+
+  if [ -d "$new_dir" ]; then
+    echo "Error: $new_dir already exists"
+    return 1
+  fi
+
+  mv "$current_dir" "$new_dir"
+
+  [[ $2 == "c" ]] && code "${new_dir}" ||
+  [[ $2 == "cr" ]] && code -r "${new_dir}" ||
+  cd "${new_dir}"
+}
+# Generate a temporary file directory
+function ,tmp() {
+  tmp_dir=$(mktemp -d $HOME/Documents/Tmp/xxx-XXXXXX)
+  [[ $1 == "c" ]] && code "$tmp_dir" || cd "$tmp_dir"
+}
+
 #****************************************#
 #                                        #
-#                   Go                   #
+#                   GO                   #
 #                                        #
 #****************************************#
 export GOPATH="$HOME/go"
@@ -177,14 +220,20 @@ export PATH=$PATH:$GOROOT/bin
 
 #****************************************#
 #                                        #
-#                   Bun                  #
+#                  PNPM                  #
 #                                        #
 #****************************************#
-# bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-# bun
+export PNPM_HOME="$HOME/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+
+#****************************************#
+#                                        #
+#                   BUN                  #
+#                                        #
+#****************************************#
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # Fig post block. Keep at the bottom of this file.
 [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
